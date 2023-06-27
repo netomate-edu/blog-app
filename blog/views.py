@@ -18,6 +18,7 @@ posts_database = [
     },
 ]
 
+
 def index(request):
     context = {
         'posts': posts_database
