@@ -10,7 +10,15 @@ class Post(models.Model):
     title = models.CharField(max_length=60)
     slug = models.SlugField(max_length=100)
     content = models.TextField()
+    author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+
+class Author(models.Model):
+    name = models.CharField(max_length=60)
+    email = models.CharField(max_length=255)
+    link = models.CharField(max_length=255)
+

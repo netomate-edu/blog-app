@@ -20,13 +20,21 @@
 
 <body>
     <h1>{{ post.title }}</h1>
-    <small>Written by: {{ post.author }}</small>
+    <small>Written by: {{ post.author.name }}</small>
+
     <br />
     <br />
     <a href="{% url 'index' %}">Home</a>
 
     <p>
         {{ post.content }}
+    </p>
+    <p>
+        Contact me
+        <br />
+        <small>Email: {{ post.author.email }}</small>
+        <br />
+        <small>Website: <a href="{{ post.author.link }}">{{ post.author.link }}</a></small>
     </p>
 </body>
 

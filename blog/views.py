@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Post
 
 
 posts_database = [
@@ -20,20 +21,18 @@ posts_database = [
 
 
 def index(request):
+    blog_posts = Post.objects.all()
     context = {
-        'posts': posts_database
+        'posts': blog_posts
     }
     return render(request, template_name='blog/index.html', context=context)
 
 
 def blog_details(request, slug):
-    blog_post = {}
-    for post in posts_database:
-        if post.get('slug') == slug:
-            blog_post = post
-    
+    post = Post.objects.filter(slug=slug)[0]
+
     context = {
-        'post': blog_post
+        'post': post
     }
 
     return render(request, template_name='blog/blog-details.html', context=context)
