@@ -11,7 +11,10 @@ def index(request):
 
 
 def blog_details(request, slug):
-    post = Post.objects.filter(slug=slug)[0]
+    post = None
+    post_qs = Post.objects.filter(slug=slug)
+    if post_qs.exists():
+        post = post_qs[0]
 
     context = {
         'post': post

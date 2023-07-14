@@ -1,41 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'blog/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ post.title }}</title>
+{% block content %}
+  <body>
+  
+  <div class="site-wrap">
 
-    <style>
-        body {
-            padding: 20px;
-        }
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+    
+    <header class="site-navbar" role="banner">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          
+          <div class="col-12 search-form-wrap js-search-form">
+            <form method="get" action="#">
+              <input type="text" id="s" class="form-control" placeholder="Search...">
+              <button class="search-btn" type="submit"><span class="icon-search"></span></button>
+            </form>
+          </div>
 
-        ul>li {
-            padding: 5px;
-        }
-    </style>
-</head>
+          <div class="col-4 site-logo">
+            <a href="index.html" class="text-black h2 mb-0">Healthy Diet</a>
+          </div>
 
-<body>
-    <h1>{{ post.title }}</h1>
-    <small>Written by: {{ post.author.name }}</small>
+          {% comment %} <div class="col-8 text-right">
+            <nav class="site-navigation" role="navigation">
+              <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
+                <li><a href="{% url 'index' %}">Home</a></li>
+              </ul>
+            </nav>
+            <a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3"></span></a></div>
+          </div> {% endcomment %}
 
-    <br />
-    <br />
-    <a href="{% url 'index' %}">Home</a>
+      </div>
+    </header>
+    
+    
+    <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url('{{ post.get_cover_url }}');">
+      <div class="container">
+        <div class="row same-height justify-content-center">
+          <div class="col-md-12 col-lg-10">
+            <div class="post-entry text-center">
+              {% comment %} <span class="post-category text-white bg-success mb-3">Nature</span> {% endcomment %}
+              <h1 class="mb-4"><a href="#">{{ post.title }}</a></h1>
+              <div class="post-meta align-items-center text-center">
+                {% comment %} <figure class="author-figure mb-0 mr-3 d-inline-block"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure> {% endcomment %}
+                <span class="d-inline-block mt-1">By {{ post.author.name }}</span>
+                <span>&nbsp;-&nbsp; {{ post.date }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <section class="site-section py-lg">
+      <div class="container">
+        
+        <div class="row blog-entries element-animate">
 
-    <p>
-        {{ post.content }}
-    </p>
-    <p>
-        Contact me
-        <br />
-        <small>Email: {{ post.author.email }}</small>
-        <br />
-        <small>Website: <a href="{{ post.author.link }}">{{ post.author.link }}</a></small>
-    </p>
-</body>
+          <div class="col-md-12 col-lg-8 main-content">
+            
+            <div class="post-content-body">
+              <p>{{ post.content }}</p>
+            </div>
+
+            
+            {% comment %} <div class="pt-5">
+              <p>Categories:  <a href="#">Food</a>, <a href="#">Travel</a>  Tags: <a href="#">#manila</a>, <a href="#">#asia</a></p>
+            </div> {% endcomment %}
+
+
+            {% comment %} <div class="pt-5">
+              <h3 class="mb-5">6 Comments</h3>
+              <ul class="comment-list">
+                <li class="comment">
+                  <div class="vcard">
+                    <img src="images/person_1.jpg" alt="Image placeholder">
+                  </div>
+                  <div class="comment-body">
+                    <h3>Jean Doe</h3>
+                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                    <p><a href="#" class="reply rounded">Reply</a></p>
+                  </div>
+                </li>
+              
+              
+              <div class="comment-form-wrap pt-5">
+                <h3 class="mb-5">Leave a comment</h3>
+                <form action="#" class="p-5 bg-light">
+                  <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" class="form-control" id="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" class="form-control" id="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="website">Website</label>
+                    <input type="url" class="form-control" id="website">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" value="Post Comment" class="btn btn-primary">
+                  </div>
+
+                </form>
+              </div>
+            </div> {% endcomment %}
+
+          </div>
+   
+        </div>
+      </div>
+    </section>
+
+  
+  </div>
+
+  </body>
+
+{% endblock content %}
 
 </html>

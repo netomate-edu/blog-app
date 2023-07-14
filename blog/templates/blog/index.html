@@ -1,32 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'blog/base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
 
-    <style>
-        body {
-            padding: 20px;
-        }
+{% block content %}
+  <body>
+  
+  <div class="site-wrap">
 
-        ul>li {
-            padding: 5px;
-        }
-    </style>
-</head>
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+    
 
-<body>
-    <h1>Healthy Diets</h1>
+    <header class="site-navbar" role="banner">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          
+          <div class="col-12 search-form-wrap js-search-form">
+            <form method="get" action="#">
+              <input type="text" id="s" class="form-control" placeholder="Search...">
+              <button class="search-btn" type="submit"><span class="icon-search"></span></button>
+            </form>
+          </div>
 
-    <h4>Recent posts</h4>
-    <ul>
-        {% for post in posts %}
-        <li><a href="{% url 'blog_details' post.slug %}">{{ post.title }}</a> <small>by: {{ post.author.name }}</small></li>
-        {% endfor %}
-    </ul>
-</body>
+          <div class="col-4 site-logo">
+            <a href="index.html" class="text-black h2 mb-0">Healthy Diet</a>
+          </div>
 
+          {% comment %} <div class="col-8 text-right">
+            <nav class="site-navigation" role="navigation">
+              <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
+                <li><a href="{% url 'index' %}">Home</a></li>
+              </ul>
+            </nav>
+            <a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3"></span></a></div>
+          </div> {% endcomment %}
+
+      </div>
+    </header>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12">
+            <h2>Recent Posts</h2>
+          </div>
+        </div>
+        <div class="row">
+          {% for post in posts %}
+          <div class="col-lg-4 mb-4">
+            <div class="entry2">
+              <a href="{% url 'blog_details' post.slug %}"><img src="{{ post.get_cover_url }}" alt="Image" class="img-fluid rounded"></a>
+              <div class="excerpt">
+              {% comment %} <span class="post-category text-white bg-secondary mb-3">Politics</span> {% endcomment %}
+
+              <h2><a href="{% url 'blog_details' post.slug %}">{{ post.title }}</a></h2>
+              <div class="post-meta align-items-center text-left clearfix">
+                {% comment %} <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure> {% endcomment %}
+                <span class="d-inline-block mt-1">By <a href="#">{{ post.author.name }}</a></span>
+                <span>&nbsp;-&nbsp; {{ post.date }}</span>
+              </div>
+              
+                <p>{{ post.content|truncatechars:'50' }}</p>
+                <p><a href="{% url 'blog_details' post.slug %}">Read More</a></p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+      
+    
+  </div>
+
+  </body>
+
+  {% endblock content %}
 </html>

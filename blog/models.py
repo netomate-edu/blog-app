@@ -9,6 +9,8 @@ User
 class Post(models.Model):
     title = models.CharField(max_length=60)
     slug = models.SlugField(max_length=100)
+    cover = models.ImageField(upload_to='uploads')
+    date = models.DateField(auto_created=True)
     content = models.TextField()
     author = models.ForeignKey('Author', on_delete=models.CASCADE)
 
@@ -19,6 +21,12 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+    
+    @property
+    def get_cover_url(self):
+        if self.cover:
+            return self.cover.url
+        return "#"
 
 
 class Author(models.Model):
