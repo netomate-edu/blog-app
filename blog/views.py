@@ -2,24 +2,6 @@ from django.shortcuts import render
 from .models import Post
 
 
-posts_database = [
-    {
-        "id": 1,
-        "title": "Post One",
-        "slug": "post-one",
-        "content": "This is post one",
-        "author": "Omole Ifedayo"
-    },
-    {
-        "id": 2,
-        "title": "Post Two",
-        "slug": "post-two",
-        "content": "This is post two",
-        "author": "Jeffrey E."
-    },
-]
-
-
 def index(request):
     blog_posts = Post.objects.all()
     context = {
